@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faSun } from "@fortawesome/free-solid-svg-icons";
 import PokeCard from "../components/PokeCard";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -8,10 +9,12 @@ const Home = () => {
       <img src="/logo_pokemon.png" alt="Logo Pokemon" className="w-1/6" />
       {/* Controles */}
       <div className="flex items-center w-2/4 p-9 gap-6">
-        <FontAwesomeIcon
-          icon={faList}
-          className="text-xl cursor-pointer text-white"
-        />
+        <Link to={"/Menu"}>
+          <FontAwesomeIcon
+            icon={faList}
+            className="text-xl cursor-pointer text-white"
+          />
+        </Link>
         <input
           type="text"
           placeholder="Search Pokemon"
@@ -23,40 +26,6 @@ const Home = () => {
         />
       </div>
       <div className="flex-1 max-w-full max-h-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-x-10 gap-y-10 overflow-auto scrollbar-hide">
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
-        <PokeCard />
         <PokeCard />
       </div>
     </div>

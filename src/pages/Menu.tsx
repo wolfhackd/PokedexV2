@@ -2,7 +2,7 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import Cards from "../components/Cards";
-import { PokemonType } from "../types/types";
+import { PokemonType, Generation } from "../types/types";
 
 const Menu = () => {
   const pokemonTypes: PokemonType[] = [
@@ -27,6 +27,17 @@ const Menu = () => {
     { name: "Stellar", color: "#6C4AB6" },
   ];
 
+  const Generations: Generation[] = [
+    { name: "Kanto", color: "#78C850" },
+    { name: "JOHTO", color: "#F8D030" },
+    { name: "HOEnn", color: "#6890F0" },
+    { name: "Sinnoh", color: "#A040A0" },
+    { name: "teselia", color: "#7038F8" },
+    { name: "kalos", color: "#F85888" },
+    { name: "alola", color: "#F08030" },
+    { name: "galar", color: "#8b54ff" },
+  ];
+
   return (
     <div className="h-screen w-screen bg-red-700 pt-5 flex flex-col items-center">
       <div className="w-full flex justify-around items-center">
@@ -37,11 +48,23 @@ const Menu = () => {
       </div>
       <h2 className="texto-pokemon text-3xl font-extrabold">Types</h2>
 
-      <div className="grid grid-cols-6 gap-5 mt-5">
+      <div className="grid grid-cols-6 gap-5 mt-5 uppercase">
         {pokemonTypes.map((item) => (
           <Cards key={item.name} text={item.name} bg={item.color} />
         ))}
       </div>
+      <h2 className="texto-pokemon text-3xl font-extrabold">Generation</h2>
+
+      <div className="grid grid-cols-6 gap-5 mt-5 uppercase">
+        {Generations.map((item) => (
+          <Cards key={item.name} text={item.name} bg={item.color} />
+        ))}
+      </div>
+      <Link to={""}>
+        <h2 className="uppercase bg-yellow-400 texto-pokemon txt-2xl border-2 border-blue-700 rounded-md p-6 cursor-pointer hover:scale-110">
+          Search
+        </h2>
+      </Link>
     </div>
   );
 };

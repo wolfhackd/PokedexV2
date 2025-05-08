@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faSun } from "@fortawesome/free-solid-svg-icons";
 import PokeCard from "../components/PokeCard";
 import { Link } from "react-router-dom";
+import PagesNumber from "../components/PagesNumber";
 
 const Home = () => {
   return (
@@ -27,8 +28,9 @@ const Home = () => {
       </div>
       {/* Colocar uma propriedade de faça aparecer centralizado ate o numero maximo de colunas */}
       <div className="flex-1 max-w-full max-h-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-x-10 gap-y-10 overflow-auto scrollbar-hide">
-        <PokeCard />
+        <PokeCard limit={20} />
       </div>
+      <PagesNumber />
     </div>
   );
 };

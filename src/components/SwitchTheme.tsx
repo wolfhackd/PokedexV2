@@ -3,7 +3,10 @@ import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
 const SwitchTheme = () => {
-  const [IsDark, setIsDark] = useState(false);
+  // erro de tema toda vez que volto pra principal ele muda pro valor original
+  const [IsDark, setIsDark] = useState(
+    window.localStorage.getItem("Dark") || false
+  );
 
   const toggleTheme = () => {
     if (IsDark) {

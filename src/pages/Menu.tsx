@@ -39,7 +39,7 @@ const Menu = () => {
   ];
 
   return (
-    <div className="h-screen w-screen bg-red-700 pt-5 flex flex-col items-center">
+    <div className="h-screen w-screen bg-red-700 dark:bg-black pt-5 flex flex-col items-center">
       <div className="w-full flex justify-around items-center">
         <img src="/logo_pokemon.png" alt="Pokemon" />
         <Link to={"/"}>

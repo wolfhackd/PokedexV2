@@ -7,7 +7,7 @@ import SwitchTheme from "../components/SwitchTheme";
 
 const Home = () => {
   return (
-    <div className="min-h-screen max-h-screen max-w-screen bg-red-700flex flex-col items-center p-3">
+    <div className="min-h-screen max-h-screen max-w-screen bg-red-700 dark:bg-black flex flex-col items-center p-3">
       <img src="/logo_pokemon.png" alt="Logo Pokemon" className="w-1/6" />
       {/* Controles */}
       <div className="flex items-center w-2/4 p-9 gap-6">

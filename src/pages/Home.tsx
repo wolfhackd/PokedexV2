@@ -4,9 +4,23 @@ import PokeCard from "../components/PokeCard";
 import { Link } from "react-router-dom";
 import PagesNumber from "../components/PagesNumber";
 import SwitchTheme from "../components/SwitchTheme";
+import { pokemonsCount } from "../api/pokeapi";
+import { useEffect, useState } from "react";
 
 const Home = () => {
-  const itemsForPages = 20;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [Items, setItems] = useState(0);
+  const itemsPerPage = 20;
+  const numPages = Math.ceil(Items / itemsPerPage);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const count = await pokemonsCount();
+      setItems(count);
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="min-h-screen max-h-screen max-w-screen bg-red-700 dark:bg-black flex flex-col items-center p-3">
       <img src="/logo_pokemon.png" alt="Logo Pokemon" className="w-1/6" />
@@ -27,9 +41,13 @@ const Home = () => {
       </div>
       {/* Colocar uma propriedade de faça aparecer centralizado ate o numero maximo de colunas */}
       <div className="flex-1 max-w-full max-h-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-x-10 gap-y-10 overflow-auto scrollbar-hide">
-        <PokeCard limit={itemsForPages} />
+        <PokeCard limit={itemsPerPage} />
       </div>
-      <PagesNumber />
+      <PagesNumber
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+        numPages={numPages}
+      />
     </div>
   );
 };

@@ -1,5 +1,3 @@
-import React from "react";
-
 const Cards = ({ text, bg }: { text: string; bg: string }) => {
   return (
     <div

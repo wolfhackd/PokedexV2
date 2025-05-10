@@ -1,81 +1,56 @@
 import React, { useEffect, useState } from "react";
-import { pokemonsCount } from "../api/pokeapi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-const PagesNumber = ({ itemsForPages = 20 }) => {
-  const [Numpages, setNumPages] = useState(0);
-  const [CurrentPage, setCurrentPage] = useState(1);
-  const [InputPage, setInputPage] = useState(CurrentPage);
+// mudei para mandar o total de itens aqui
+const PagesNumber = ({ currentPage, onPageChange, numPages }) => {
+  const [inputPage, setInputPage] = useState(currentPage);
 
-  const numberOfPages = async () => {
-    const count = await pokemonsCount();
-    let pages = 0;
-    if (count) {
-      pages = Math.floor(count / itemsForPages);
-      if (count % itemsForPages !== 0) {
-        setNumPages(pages + 1);
-      } else {
-        setNumPages(pages);
-      }
-    }
-  };
+  useEffect(() => {
+    setInputPage(currentPage);
+  }, [currentPage]);
 
   const handleInputChange = (e) => {
     setInputPage(e.target.value);
   };
+
   const handlePageSubmit = () => {
-    const page = parseInt(InputPage, 10);
-    if (!isNaN(page) && page >= 1 && page <= Numpages) {
-      setCurrentPage(page);
+    const page = parseInt(inputPage, 10);
+    if (!isNaN(page) && page >= 1 && page <= numPages) {
+      onPageChange(page);
     } else {
-      setInputPage(CurrentPage);
+      setInputPage(currentPage); // volta ao valor correto
     }
   };
 
-  useEffect(() => {
-    numberOfPages();
-  }, [itemsForPages]);
-
-  useEffect(() => {
-    setInputPage(CurrentPage);
-  }, [CurrentPage]);
-
-  /* Falta resolver o problema onde o usuário coloca o número e o valor muda e a pagina tambem */
   return (
-    <div className="flex gap-2 items-center select-none text-white font-semibold">
-      <FontAwesomeIcon
-        icon={faChevronLeft}
-        className="cursor-pointer"
-        onClick={() =>
-          setCurrentPage(CurrentPage >= 2 ? CurrentPage - 1 : CurrentPage)
-        }
+    <div className="text-white">
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
+        className=""
+        disabled={currentPage <= 1}
+      >
+        <FontAwesomeIcon icon={faChevronLeft} />
+      </button>
+      <input
+        type="number"
+        value={inputPage}
+        onChange={handleInputChange}
+        onKeyDown={(e) => e.key === "Enter" && handlePageSubmit()}
+        onBlur={handlePageSubmit}
+        className="focus:outline-none bg-transparent focus:bg-blue-300 w-6 no-spinner text-center"
       />
-
-      <span>
-        Página
-        <input
-          type="number"
-          value={InputPage}
-          onChange={handleInputChange}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") handlePageSubmit();
-          }}
-          onBlur={handlePageSubmit}
-          className="bg-transparent border-none no-spinner text-center w-6 focus:outline-none focus:bg-blue-500"
-        />
-        {` de ${Numpages}`}
-      </span>
-      <FontAwesomeIcon
-        icon={faChevronRight}
-        className="cursor-pointer"
-        onClick={() =>
-          setCurrentPage(CurrentPage < Numpages ? CurrentPage + 1 : CurrentPage)
-        }
-      />
+      <span>de {numPages}</span>
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        className=""
+        disabled={currentPage >= numPages}
+      >
+        <FontAwesomeIcon icon={faChevronRight} />
+      </button>
     </div>
   );
 };
